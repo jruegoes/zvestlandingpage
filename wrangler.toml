@@ -1,3 +1,5 @@
 name = "zvestpage"
 compatibility_date = "2025-05-15"
-pages_build_output_dir = "./dist"
+
+[assets]
+directory = "./dist"
