@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const tiers = [
+  {
+    name: "Starter",
+    color: "cc-green",
+    price: "€0",
+    tag: "Brezplačno",
+    desc: "Za posameznike, ki želijo preizkusiti platformo brez tveganja.",
+    features: ["Osnovni program zvestobe", "Meniji", "E-poštna podpora"],
+  },
+  {
+    name: "Basic",
+    color: "cc-blue",
+    price: "€19",
+    tag: "Najbolj priljubljen",
+    desc: "Za rastoča podjetja, ki želijo zgraditi pravo zvestobo.",
+    features: [
+      "Napredni program zvestobe",
+      "AI analitika",
+      "Omejena potisna obvestila in avtomatizirane kampanje",
+      "E-poštne kampanje",
+      "E-poštna podpora",
+      "Rezervacije",
+    ],
+  },
+  {
+    name: "Pro",
+    color: "cc-purple",
+    price: "€49",
+    tag: "Vse vključeno",
+    desc: "Za velika podjetja z naprednimi potrebami in več lokacijami.",
+    features: [
+      "Vse iz Basic",
+      "Napredna AI analitika in svetovanje",
+      "Neomejena potisna obvestila in kampanje",
+      "SMS obvestila",
+      "Telefonska podpora v živo",
+      "Rezervacije",
+      "Naročanje preko aplikacije",
+    ],
+  },
+];
+---
+
+<Layout title="Cenik — Zvest">
+  <Nav />
+  <main>
+    <section class="section cc-pricing">
+      <div class="page-padding">
+        <div class="container-pop">
+          <div class="section-header cc-pricing">
+            <h2 class="section-heading">Izberite svoj načrt.</h2>
+            <p class="subheading">Začnite brezplačno. Nadgradite kadarkoli.</p>
+          </div>
+
+          <div class="features-grid">
+            {tiers.map((t) => (
+              <article class={`features-card pricing-card ${t.color}`}>
+                <div class="features-visual">
+                  <div class="pricing-visual">
+                    <div class="price-visual-monthly">Mesečno</div>
+                    <div class="feature-visual-price">{t.price}</div>
+                    <div class="pricing-tag-pill">
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 8.88887L6.66667 11.5555L11.8889 5.33331" stroke="#393737" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                      <span>{t.tag}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="features-card-content">
+                  <h3 class="heading-m u-mb-m">{t.name}</h3>
+                  <p class="subheading cc-features">{t.desc}</p>
+                  <ul class="pricing-features">
+                    {t.features.map((f) => (
+                      <li>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4 8.88887L6.66667 11.5555L11.8889 5.33331" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a href="/podjetje" class="cta pricing-cta">
+                    <span class="cta-bg u-rainbow u-blur-perf"></span>
+                    <span class="cta-inner"><strong>Začni</strong></span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,31 @@
+---
+const reviews = [
+  { title: "\u201CA game changer for\u00A0travelers\u201D", author: "Chicagosnow1" },
+  { title: "\u201CNo more roaming costs or buying extra eSIMs\u201D", author: "nnnoah25" },
+  { title: "\u201CLegitimately the best carrier experience\u201D", author: "r_x_rx" },
+];
+const star = "https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/67c56ad8ede5f320430a62e8_star.webp";
+---
+
+<section class="section cc-reviews">
+  <div class="page-padding">
+    <div class="container-pop">
+      <div class="section-header cc-reviews">
+        <h2 class="section-heading">They love it, so&nbsp;will&nbsp;you</h2>
+      </div>
+      <div class="features-grid cc-reviews">
+        {reviews.map((r) => (
+          <div class="review-card">
+            <div class="stars">
+              {Array.from({ length: 5 }).map(() => (
+                <img src={star} loading="lazy" width="14" height="14" alt="" />
+              ))}
+            </div>
+            <h3 class="review-title">{r.title}</h3>
+            <div class="u-mt-auto">{r.author}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

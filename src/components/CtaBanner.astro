@@ -1,0 +1,48 @@
+---
+const steps = [
+  { n: "1", label: "Sign up" },
+  { n: "2", label: "Install eSIM" },
+  { n: "3", label: "You're online!" },
+];
+---
+
+<section id="signup" class="section cc-cta-banner">
+  <div class="page-padding">
+    <div class="container-pop">
+      <div class="cta-banner">
+        <div class="cta-banner-left">
+          <div class="cta-banner-left-content">
+            <h3 class="heading-l">Get connected in&nbsp;5 minutes</h3>
+            <ul class="steps-list">
+              {steps.map((s) => (
+                <li class="steps-list-item">
+                  <span class="steps-list-step">{s.n}</span>
+                  <span>{s.label}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="timed-tag u-rainbow">
+              <span>Yes, we timed it.</span>
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.24634 0.730242C3.42974 0.778366 0.374344 3.91179 0.422468 7.7284C0.470591 11.545 3.60402 14.6004 7.42063 14.5523C11.2372 14.5042 14.2926 11.3707 14.2445 7.55412C14.1855 3.74226 11.0585 0.693119 7.24634 0.730242ZM11.453 5.11651L6.33504 10.3651C6.22416 10.4788 6.07743 10.5371 5.93 10.539C5.78256 10.5409 5.63442 10.4863 5.5207 10.3754L3.18798 8.10077C2.95995 7.87842 2.95536 7.51444 3.17771 7.28642C3.40005 7.0584 3.76403 7.05381 3.99206 7.27615L5.91247 9.14874L10.6283 4.31243C10.8507 4.0844 11.2147 4.07982 11.4427 4.30216C11.6707 4.5245 11.6753 4.88848 11.453 5.11651Z" fill="#212121"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="cta-banner-right">
+          <div>
+            <h3 class="heading-l">One plan,<br />one price.</h3>
+            <div class="cta-banner-price">$69</div>
+            <div class="u-weight-600">Per Month</div>
+          </div>
+          <a href="#" class="cta">
+            <span class="cta-bg u-rainbow u-blur-perf cc-dark"></span>
+            <span class="cta-inner cc-dark"><strong>Sign up</strong></span>
+          </a>
+          <img src="https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/69cd18ca5f9f525f55ff2316_popcorn-home-app-left.webp" loading="lazy" alt="" class="cta-banner-mockup" />
+          <img src="https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/69cd22f5116abb057eb80fe5_mobile_footer_device.webp" loading="lazy" alt="" class="cta-banner-img-mobile" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

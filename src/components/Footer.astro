@@ -1,0 +1,45 @@
+---
+const cols = [
+  { heading: "Povezave", links: [
+    { href: "/", label: "Domov", current: true },
+    { href: "/uporabnik", label: "Pridruži se kot uporabnik" },
+    { href: "/podjetje", label: "Pridruži se kot podjetje" },
+    { href: "/cenik", label: "Cenik" },
+  ]},
+  { heading: "Pravno", links: [
+    { href: "/pogoji", label: "Pogoji uporabe" },
+    { href: "/pravila", label: "Pravila igre" },
+    { href: "/zasebnost", label: "Zasebnost" },
+    { href: "/pomoc", label: "Pomoč" },
+  ]},
+  { heading: "Družbena omrežja", links: [
+    { href: "https://x.com/zvest", label: "X" },
+    { href: "https://www.instagram.com/zvest/", label: "Instagram" },
+  ]},
+];
+---
+
+<div class="footer">
+  <div class="page-padding">
+    <div class="container-pop">
+      <div class="footer-menu">
+        <a href="#" class="footer-logo" aria-label="Zvest">
+          <img src="/logo.png" alt="Zvest" class="footer-logo-img" />
+        </a>
+
+        {cols.map((c) => (
+          <div class="footer-cell">
+            <div class="footer-heading">{c.heading}</div>
+            {c.links.map((l) => (
+              <a href={l.href} class="footer-link" aria-current={l.current ? "page" : undefined}>{l.label}</a>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div class="footer-large-logo">
+        <img src="/logo.png" alt="Zvest" class="footer-large-logo-img" />
+      </div>
+    </div>
+  </div>
+</div>

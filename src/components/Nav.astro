@@ -1,0 +1,73 @@
+---
+const links = [
+  { href: "/", label: "Domov", current: true },
+  { href: "/uporabnik", label: "Pridruži se kot uporabnik" },
+  { href: "/podjetje", label: "Pridruži se kot podjetje" },
+  { href: "/cenik", label: "Cenik" },
+];
+---
+
+<nav class="nav" id="site-nav">
+  <div class="page-padding">
+    <div class="container-pop">
+      <div class="nav-inner">
+        <div class="nav-left">
+          <a aria-label="Zvest logo" href="/" aria-current="page" class="nav-logo">
+            <img src="/logo.png" alt="Zvest" class="nav-logo-img" />
+          </a>
+
+          <div class="nav-menu">
+            {links.map((l) => (
+              <a href={l.href} class="nav-link" aria-current={l.current ? "page" : undefined}>{l.label}</a>
+            ))}
+          </div>
+        </div>
+
+        <div class="nav-right">
+          <a href="#signup" class="cta hidden md:inline-flex">
+            <span class="cta-bg u-rainbow u-blur-perf"></span>
+            <span class="cta-inner cc-nav"><strong>Prijava</strong></span>
+          </a>
+          <button type="button" class="nav-mobile-btn" aria-label="Odpri meni" id="nav-toggle">
+            <span class="hamburger_1_wrap">
+              <span class="hamburger_1_line"></span>
+              <span class="hamburger_1_line"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-mobile-menu">
+    <div class="page-padding">
+      <div class="container-pop pt-8">
+        <div class="mobile-menu-fade" style="--delay: 0.05s"><a href="/" class="nav-mobile-link" aria-current="page">Domov</a></div>
+        <div class="mobile-menu-fade" style="--delay: 0.1s"><a href="/uporabnik" class="nav-mobile-link">Pridruži se kot uporabnik</a></div>
+        <div class="mobile-menu-fade" style="--delay: 0.15s"><a href="/podjetje" class="nav-mobile-link">Pridruži se kot podjetje</a></div>
+        <div class="mobile-menu-fade" style="--delay: 0.2s"><a href="/cenik" class="nav-mobile-link">Cenik</a></div>
+        <div class="mobile-menu-fade pt-6" style="--delay: 0.25s">
+          <a href="/pogoji" class="nav-mobile-link cc-small">Pogoji uporabe</a>
+          <a href="/pravila" class="nav-mobile-link cc-small">Pravila igre</a>
+        </div>
+        <div class="mobile-menu-fade pt-6" style="--delay: 0.3s">
+          <a href="#signup" class="cta">
+            <span class="cta-bg u-rainbow u-blur-perf"></span>
+            <span class="cta-inner"><strong>Prijava</strong></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  (function () {
+    const nav = document.getElementById("site-nav");
+    const btn = document.getElementById("nav-toggle");
+    if (!nav || !btn) return;
+    btn.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+  })();
+</script>

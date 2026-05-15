@@ -1,0 +1,736 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const posProviders = [
+  { id: "elektroncek", name: "POS Elektronček", desc: "Slovenski POS sistem za gostinstvo." },
+  { id: "microgramm", name: "Microgramm", desc: "Celovita rešitev za trgovino in gostinstvo." },
+  { id: "eblagajna", name: "eBlagajna", desc: "Davčna blagajna v oblaku." },
+  { id: "imprion", name: "Imprion", desc: "Sodoben POS za moderna podjetja." },
+];
+
+const categories = [
+  "Restavracija",
+  "Kavarna",
+  "Bar",
+  "Slaščičarna",
+  "Pekarna",
+  "Trgovina",
+  "Frizerski salon",
+  "Drugo",
+];
+
+const plans = [
+  {
+    id: "starter",
+    name: "Starter",
+    price: "€0",
+    color: "cc-green",
+    tag: "Brezplačno",
+    desc: "Za posameznike, ki želijo preizkusiti platformo brez tveganja.",
+  },
+  {
+    id: "basic",
+    name: "Basic",
+    price: "€19",
+    color: "cc-blue",
+    tag: "Najbolj priljubljen",
+    desc: "Za rastoča podjetja, ki želijo zgraditi pravo zvestobo.",
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    price: "€49",
+    color: "cc-purple",
+    tag: "Vse vključeno",
+    desc: "Za velika podjetja z naprednimi potrebami in več lokacijami.",
+  },
+];
+
+const steps = [
+  { n: 1, label: "POS ponudnik" },
+  { n: 2, label: "Osnovni podatki" },
+  { n: 3, label: "Slika v aplikaciji" },
+  { n: 4, label: "Naročniški paket" },
+  { n: 5, label: "Vprašanja" },
+];
+---
+
+<Layout title="Pridruži se kot podjetje — Zvest">
+  <Nav />
+  <main class="page-padding">
+    <div class="container-pop signup-wrap">
+      <header class="signup-header">
+        <h1 class="heading-l">Pridruži se kot podjetje</h1>
+        <p class="subheading signup-sub">
+          V nekaj korakih postavimo tvojo trgovino na Zvest. Vodili te bomo skozi
+          POS povezavo, osnovne podatke in izbiro paketa.
+        </p>
+      </header>
+
+      <ol class="signup-steps" aria-label="Koraki registracije">
+        {steps.map((s) => (
+          <li class="signup-step" data-step={s.n}>
+            <span class="signup-step-num">{s.n}</span>
+            <span class="signup-step-label">{s.label}</span>
+          </li>
+        ))}
+      </ol>
+
+      <form id="signup-form" class="signup-form" novalidate>
+        {/* STEP 1 — POS PROVIDER */}
+        <section class="signup-panel is-active" data-panel="1">
+          <div class="panel-head">
+            <span class="panel-eyebrow">Korak 1 / 5</span>
+            <h2 class="heading-m">Izbira POS ponudnika</h2>
+            <p class="subheading cc-features">
+              Izberi ponudnika, ki ga uporabljaš v svojem podjetju. Tako se Zvest
+              poveže neposredno z blagajno.
+            </p>
+          </div>
+
+          <div class="option-grid">
+            {posProviders.map((p) => (
+              <label class="option-card" data-pos={p.id}>
+                <input type="radio" name="pos" value={p.id} required />
+                <span class="option-card-inner">
+                  <span class="option-check" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M4 8.88887L6.66667 11.5555L11.8889 5.33331" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span class="option-title">{p.name}</span>
+                  <span class="option-desc">{p.desc}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+
+          <div class="panel-actions cc-end">
+            <button type="button" class="cta panel-next" data-next>
+              <span class="cta-bg u-rainbow u-blur-perf"></span>
+              <span class="cta-inner"><strong>Naprej</strong></span>
+            </button>
+          </div>
+        </section>
+
+        {/* STEP 2 — BASIC INFO */}
+        <section class="signup-panel" data-panel="2">
+          <div class="panel-head">
+            <span class="panel-eyebrow">Korak 2 / 5</span>
+            <h2 class="heading-m">Osnovni podatki</h2>
+            <p class="subheading cc-features">
+              Tako se boš predstavil v aplikaciji Zvest in tako te bomo lahko
+              kontaktirali.
+            </p>
+          </div>
+
+          <div class="form-card">
+            <div class="form-card-head">Osnovni podatki</div>
+            <div class="form-grid">
+              <div class="form-row">
+                <label class="form-label" for="ime">Ime trgovine</label>
+                <input id="ime" name="ime" type="text" class="form-input" placeholder="Mašina bar" required />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="email">E-pošta</label>
+                <input id="email" name="email" type="email" class="form-input" placeholder="ime@podjetje.si" required />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="telefon">Telefon</label>
+                <input id="telefon" name="telefon" type="tel" class="form-input" placeholder="+386 …" />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="splet">Spletna stran</label>
+                <input id="splet" name="splet" type="url" class="form-input" placeholder="https://" />
+              </div>
+              <div class="form-row cc-full">
+                <label class="form-label" for="opis">Opis</label>
+                <textarea id="opis" name="opis" class="form-input" rows="3" placeholder="V nekaj besedah opiši svojo trgovino."></textarea>
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="promo">Promocijsko besedilo</label>
+                <input id="promo" name="promo" type="text" class="form-input" maxlength="50" placeholder="npr. Najboljša kava v Ljubljani" />
+                <span class="form-hint" id="promo-hint">50 znakov preostane</span>
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="kategorija">Kategorija</label>
+                <select id="kategorija" name="kategorija" class="form-input">
+                  {categories.map((c) => <option value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div class="form-row cc-full">
+                <label class="form-label" for="naslov">Naslov</label>
+                <textarea id="naslov" name="naslov" class="form-input" rows="2" placeholder="Ulica 1, 1000 Ljubljana, Slovenija"></textarea>
+              </div>
+              <div class="form-row cc-full">
+                <label class="form-label" for="barva">Barva blagovne znamke</label>
+                <div class="color-row">
+                  <input id="barva-pick" type="color" value="#779245" class="color-swatch" aria-label="Izberi barvo" />
+                  <input id="barva" name="barva" type="text" value="#779245" class="form-input color-text" />
+                  <span class="color-preview" id="color-preview" style="background:#779245"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-actions">
+            <button type="button" class="ghost-btn" data-back>← Nazaj</button>
+            <button type="button" class="cta panel-next" data-next>
+              <span class="cta-bg u-rainbow u-blur-perf"></span>
+              <span class="cta-inner"><strong>Naprej</strong></span>
+            </button>
+          </div>
+        </section>
+
+        {/* STEP 3 — APP PICTURE */}
+        <section class="signup-panel" data-panel="3">
+          <div class="panel-head">
+            <span class="panel-eyebrow">Korak 3 / 5</span>
+            <h2 class="heading-m">Slika v aplikaciji</h2>
+            <p class="subheading cc-features">
+              Naloži sliko, s katero bo tvoje podjetje predstavljeno v aplikaciji
+              Zvest. Priporočamo razmerje 4:3 in vsaj 1200 px širine.
+            </p>
+          </div>
+
+          <div class="upload-card">
+            <label class="upload-drop" id="upload-drop" for="slika">
+              <input id="slika" name="slika" type="file" accept="image/*" hidden />
+              <div class="upload-preview" id="upload-preview">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </div>
+              <div class="upload-text">
+                <strong>Klikni ali povleci sliko</strong>
+                <span>JPG, PNG ali WebP — do 5 MB</span>
+              </div>
+            </label>
+            <button type="button" class="ghost-btn upload-clear" id="upload-clear" hidden>Odstrani sliko</button>
+          </div>
+
+          <div class="panel-actions">
+            <button type="button" class="ghost-btn" data-back>← Nazaj</button>
+            <button type="button" class="cta panel-next" data-next>
+              <span class="cta-bg u-rainbow u-blur-perf"></span>
+              <span class="cta-inner"><strong>Naprej</strong></span>
+            </button>
+          </div>
+        </section>
+
+        {/* STEP 4 — PLAN */}
+        <section class="signup-panel" data-panel="4">
+          <div class="panel-head">
+            <span class="panel-eyebrow">Korak 4 / 5</span>
+            <h2 class="heading-m">Izberi naročniški paket</h2>
+            <p class="subheading cc-features">
+              Začni brezplačno in nadgradi kadarkoli. Vse podrobnosti najdeš na
+              <a href="/cenik" class="signup-inline-link">ceniku</a>.
+            </p>
+          </div>
+
+          <div class="plan-grid">
+            {plans.map((p) => (
+              <label class={`plan-card ${p.color}`} data-plan={p.id}>
+                <input type="radio" name="plan" value={p.id} required />
+                <span class="plan-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 8.88887L6.66667 11.5555L11.8889 5.33331" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <span class="plan-price-wrap">
+                  <span class="plan-monthly">Mesečno</span>
+                  <span class="plan-price">{p.price}</span>
+                  <span class="plan-tag">{p.tag}</span>
+                </span>
+                <span class="plan-name">{p.name}</span>
+                <span class="plan-desc">{p.desc}</span>
+              </label>
+            ))}
+          </div>
+
+          <div class="panel-actions">
+            <button type="button" class="ghost-btn" data-back>← Nazaj</button>
+            <button type="button" class="cta panel-next" data-next>
+              <span class="cta-bg u-rainbow u-blur-perf"></span>
+              <span class="cta-inner"><strong>Naprej</strong></span>
+            </button>
+          </div>
+        </section>
+
+        {/* STEP 5 — QUESTIONS / FINISH */}
+        <section class="signup-panel" data-panel="5">
+          <div class="panel-head">
+            <span class="panel-eyebrow">Korak 5 / 5</span>
+            <h2 class="heading-m">Imaš še kakšno vprašanje?</h2>
+            <p class="subheading cc-features">
+              Zapiši nam, kar te zanima, in pred dogovorom ti odgovorimo. Lahko
+              tudi pustiš prazno.
+            </p>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-row cc-full">
+                <label class="form-label" for="vprasanja">Tvoja vprašanja ali opombe</label>
+                <textarea id="vprasanja" name="vprasanja" class="form-input" rows="5" placeholder="Npr. Kako poteka povezava z blagajno? Kdaj lahko začnemo?"></textarea>
+              </div>
+              <div class="form-row cc-full">
+                <label class="checkbox-row">
+                  <input type="checkbox" name="strinjanje" required />
+                  <span>Strinjam se s <a href="/pogoji" class="signup-inline-link">pogoji uporabe</a> in <a href="/zasebnost" class="signup-inline-link">politiko zasebnosti</a>.</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-actions">
+            <button type="button" class="ghost-btn" data-back>← Nazaj</button>
+            <button type="submit" class="cta">
+              <span class="cta-bg u-rainbow u-blur-perf"></span>
+              <span class="cta-inner"><strong>Pošlji prijavo</strong></span>
+            </button>
+          </div>
+        </section>
+
+        {/* SUCCESS */}
+        <section class="signup-panel signup-success" data-panel="done">
+          <div class="success-card">
+            <div class="success-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h2 class="heading-m">Hvala — prijava sprejeta!</h2>
+            <p class="subheading cc-features">
+              Tvoji podatki so na poti k nam. Naša ekipa se ti bo oglasila v
+              enem delovnem dnevu in te vodila skozi povezavo z blagajno.
+            </p>
+            <a href="/" class="cta">
+              <span class="cta-bg u-rainbow u-blur-perf"></span>
+              <span class="cta-inner"><strong>Nazaj na domov</strong></span>
+            </a>
+          </div>
+        </section>
+      </form>
+    </div>
+  </main>
+  <Footer />
+
+<style>
+  .signup-wrap { padding-top: 96px; padding-bottom: 120px; }
+  @media (min-width: 768px) { .signup-wrap { padding-top: 120px; } }
+
+  .signup-header { max-width: 720px; margin-bottom: 40px; }
+  .signup-sub { color: rgba(33,33,33,0.65); margin-top: 14px; }
+
+  /* Stepper */
+  .signup-steps {
+    list-style: none; padding: 0; margin: 0 0 32px;
+    display: flex; gap: 8px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: 18px;
+  }
+  .signup-step {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 14px; border-radius: 999px;
+    background: rgba(33,33,33,0.04);
+    font-size: 13px; font-weight: 600; color: rgba(33,33,33,0.55);
+    transition: background 220ms ease, color 220ms ease;
+  }
+  .signup-step-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 999px;
+    background: rgba(33,33,33,0.08);
+    font-size: 12px; font-weight: 700;
+  }
+  .signup-step.is-active { background: var(--color-ink); color: #fff; }
+  .signup-step.is-active .signup-step-num { background: rgba(255,255,255,0.18); color: #fff; }
+  .signup-step.is-done { background: rgba(33,33,33,0.85); color: #fff; }
+  .signup-step.is-done .signup-step-num { background: rgba(255,255,255,0.18); }
+  @media (max-width: 640px) {
+    .signup-step-label { display: none; }
+    .signup-step { padding: 6px; }
+  }
+
+  /* Panels */
+  .signup-panel { display: none; animation: panelIn 0.35s ease both; }
+  .signup-panel.is-active { display: block; }
+  @keyframes panelIn { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+
+  .panel-head { max-width: 720px; margin-bottom: 28px; }
+  .panel-eyebrow {
+    display: inline-block; margin-bottom: 14px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #C36A4D;
+  }
+  .panel-head .subheading { color: rgba(33,33,33,0.7); margin-top: 10px; }
+
+  /* Option cards (POS) */
+  .option-grid {
+    display: grid; grid-template-columns: 1fr; gap: 14px;
+  }
+  @media (min-width: 720px) { .option-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  .option-card { cursor: pointer; }
+  .option-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .option-card-inner {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 22px 22px 22px 56px;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: 18px;
+    position: relative;
+    transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  }
+  .option-card:hover .option-card-inner { border-color: rgba(33,33,33,0.25); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.05); }
+  .option-check {
+    position: absolute; top: 22px; left: 18px;
+    width: 22px; height: 22px; border-radius: 999px;
+    border: 1.5px solid rgba(33,33,33,0.2);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: transparent; background: #fff;
+    transition: background 220ms ease, border-color 220ms ease, color 220ms ease;
+  }
+  .option-title { font-size: 17px; font-weight: 700; }
+  .option-desc { font-size: 14px; color: rgba(33,33,33,0.65); }
+  .option-card input:checked + .option-card-inner {
+    border-color: var(--color-ink);
+    box-shadow: 0 0 0 2px var(--color-ink);
+  }
+  .option-card input:checked + .option-card-inner .option-check {
+    background: var(--color-ink); border-color: var(--color-ink); color: #fff;
+  }
+
+  /* Form card */
+  .form-card {
+    background: var(--color-cream);
+    border: 1px solid var(--color-line);
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  }
+  @media (min-width: 768px) { .form-card { padding: 36px; } }
+  .form-card-head {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #C36A4D;
+    margin-bottom: 22px;
+  }
+  .form-grid {
+    display: grid; grid-template-columns: 1fr; gap: 18px 24px;
+  }
+  @media (min-width: 720px) { .form-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  .form-row.cc-full { grid-column: 1 / -1; }
+  .form-row { display: flex; flex-direction: column; gap: 8px; }
+  .form-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: rgba(33,33,33,0.65);
+  }
+  .form-input {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 15px; font-family: inherit; color: var(--color-ink);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .form-input:focus { outline: none; border-color: var(--color-ink); box-shadow: 0 0 0 3px rgba(33,33,33,0.08); }
+  textarea.form-input { resize: vertical; min-height: 80px; line-height: 1.4; }
+  select.form-input { appearance: none; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23212121' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+  .form-hint { font-size: 12px; color: rgba(33,33,33,0.5); }
+
+  /* Color picker row */
+  .color-row { display: flex; align-items: center; gap: 10px; }
+  .color-swatch { width: 44px; height: 44px; padding: 0; border: 1px solid var(--color-line); border-radius: 10px; background: #fff; cursor: pointer; }
+  .color-swatch::-webkit-color-swatch-wrapper { padding: 4px; }
+  .color-swatch::-webkit-color-swatch { border: none; border-radius: 6px; }
+  .color-text { flex: 1; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .color-preview { width: 56px; height: 44px; border-radius: 10px; border: 1px solid var(--color-line); }
+
+  /* Upload */
+  .upload-card { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .upload-drop {
+    display: flex; align-items: center; gap: 18px;
+    width: 100%;
+    background: var(--color-cream);
+    border: 1.5px dashed rgba(33,33,33,0.22);
+    border-radius: 22px;
+    padding: 28px;
+    cursor: pointer;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+  .upload-drop:hover, .upload-drop.is-dragging { border-color: var(--color-ink); background: #fff; }
+  .upload-preview {
+    width: 96px; height: 96px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid var(--color-line);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(33,33,33,0.4);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .upload-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .upload-text { display: flex; flex-direction: column; gap: 4px; }
+  .upload-text strong { font-size: 16px; font-weight: 700; }
+  .upload-text span { font-size: 13px; color: rgba(33,33,33,0.55); }
+
+  /* Plans */
+  .plan-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 900px) { .plan-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+  .plan-card {
+    cursor: pointer; position: relative; overflow: hidden;
+    border-radius: 22px; padding: 28px;
+    display: flex; flex-direction: column; gap: 14px;
+    border: 2px solid transparent;
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  }
+  .plan-card:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(0,0,0,0.08); }
+  .plan-card.cc-green { background: linear-gradient(160deg, #DDF3CD 0%, #EEF8E5 60%, #E7F3E0 100%); }
+  .plan-card.cc-blue { background: linear-gradient(160deg, #D6E4F4 0%, #ECF2FA 60%, #E5EFF8 100%); }
+  .plan-card.cc-purple { background: linear-gradient(160deg, #EAD9FC 0%, #F2E9FA 60%, #F0E7FA 100%); }
+  .plan-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .plan-check {
+    position: absolute; top: 18px; right: 18px;
+    width: 26px; height: 26px; border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    border: 1.5px solid rgba(33,33,33,0.15);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: transparent;
+    transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+  }
+  .plan-card input:checked ~ .plan-check { background: var(--color-ink); border-color: var(--color-ink); color: #fff; }
+  .plan-card input:checked ~ * { /* keep selectors stable */ }
+  .plan-card:has(input:checked) { border-color: var(--color-ink); box-shadow: 0 14px 32px rgba(0,0,0,0.1); }
+  .plan-price-wrap {
+    background: rgba(255,255,255,0.6);
+    border-radius: 16px; padding: 20px 18px;
+    display: flex; flex-direction: column; gap: 4px; align-items: flex-start;
+  }
+  .plan-monthly { font-size: 12px; font-weight: 600; color: rgba(33,33,33,0.55); }
+  .plan-price { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .plan-tag {
+    margin-top: 10px; padding: 5px 10px; border-radius: 999px;
+    background: rgba(33,33,33,0.08); font-size: 11px; font-weight: 700;
+  }
+  .plan-name { font-size: 22px; font-weight: 700; }
+  .plan-desc { font-size: 14px; color: rgba(33,33,33,0.7); }
+
+  /* Checkbox */
+  .checkbox-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: rgba(33,33,33,0.8); }
+  .checkbox-row input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--color-ink); }
+  .signup-inline-link { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Actions */
+  .panel-actions {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 14px; margin-top: 32px;
+  }
+  .panel-actions.cc-end { justify-content: flex-end; }
+  .ghost-btn {
+    height: 48px; padding: 0 18px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid var(--color-line);
+    font-size: 14px; font-weight: 600; color: var(--color-ink);
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease;
+  }
+  .ghost-btn:hover { background: rgba(33,33,33,0.05); border-color: rgba(33,33,33,0.25); }
+
+  /* Success */
+  .success-card {
+    text-align: center;
+    background: var(--color-cream);
+    border: 1px solid var(--color-line);
+    border-radius: 24px;
+    padding: 56px 32px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .success-icon {
+    width: 64px; height: 64px; border-radius: 999px;
+    background: #DDF3CD; color: #2f5f2a;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 6px;
+  }
+  .success-card .cta { margin-top: 12px; }
+
+  /* Field error state */
+  .form-input.is-invalid { border-color: #C36A4D; box-shadow: 0 0 0 3px rgba(195,106,77,0.12); }
+</style>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById("signup-form");
+    if (!form) return;
+
+    const panels = Array.from(form.querySelectorAll(".signup-panel"));
+    const steps = Array.from(document.querySelectorAll(".signup-step"));
+    const total = steps.length;
+    let current = 1;
+
+    function show(step) {
+      panels.forEach((p) => {
+        const key = p.getAttribute("data-panel");
+        const active = key === String(step) || (step === "done" && key === "done");
+        p.classList.toggle("is-active", active);
+      });
+      steps.forEach((s) => {
+        const n = Number(s.getAttribute("data-step"));
+        s.classList.toggle("is-active", n === step);
+        s.classList.toggle("is-done", typeof step === "number" && n < step);
+      });
+      // Scroll the form into view so the user sees the new step
+      const top = form.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+
+    function validatePanel(n) {
+      const panel = form.querySelector(`[data-panel="${n}"]`);
+      if (!panel) return true;
+      let ok = true;
+      // radios with required
+      const radioGroups = new Set();
+      panel.querySelectorAll('input[type="radio"][required]').forEach((r) => radioGroups.add(r.name));
+      radioGroups.forEach((name) => {
+        const any = form.querySelector(`input[name="${name}"]:checked`);
+        if (!any) ok = false;
+      });
+      // basic required inputs
+      panel.querySelectorAll('input[required], textarea[required], select[required]').forEach((el) => {
+        if (el.type === "radio" || el.type === "checkbox") return;
+        if (!el.value.trim()) { el.classList.add("is-invalid"); ok = false; }
+        else el.classList.remove("is-invalid");
+      });
+      // email format
+      const email = panel.querySelector('input[type="email"]');
+      if (email && email.value && !/^\S+@\S+\.\S+$/.test(email.value)) {
+        email.classList.add("is-invalid"); ok = false;
+      }
+      // required checkboxes (step 5)
+      panel.querySelectorAll('input[type="checkbox"][required]').forEach((c) => {
+        if (!c.checked) ok = false;
+      });
+      return ok;
+    }
+
+    form.querySelectorAll("[data-next]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (!validatePanel(current)) {
+          btn.animate(
+            [{ transform: "translateX(0)" }, { transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "translateX(0)" }],
+            { duration: 260, easing: "ease-out" }
+          );
+          return;
+        }
+        if (current < total) {
+          current += 1;
+          show(current);
+        }
+      });
+    });
+
+    form.querySelectorAll("[data-back]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (current > 1) {
+          current -= 1;
+          show(current);
+        }
+      });
+    });
+
+    // Promo char counter
+    const promo = document.getElementById("promo");
+    const promoHint = document.getElementById("promo-hint");
+    if (promo && promoHint) {
+      const update = () => {
+        const left = 50 - promo.value.length;
+        promoHint.textContent = `${left} znakov preostane`;
+      };
+      promo.addEventListener("input", update);
+      update();
+    }
+
+    // Color picker sync
+    const colorPick = document.getElementById("barva-pick");
+    const colorText = document.getElementById("barva");
+    const colorPreview = document.getElementById("color-preview");
+    if (colorPick && colorText && colorPreview) {
+      colorPick.addEventListener("input", () => {
+        colorText.value = colorPick.value;
+        colorPreview.style.background = colorPick.value;
+      });
+      colorText.addEventListener("input", () => {
+        const v = colorText.value.trim();
+        if (/^#([0-9a-fA-F]{6})$/.test(v)) {
+          colorPick.value = v;
+          colorPreview.style.background = v;
+        }
+      });
+    }
+
+    // Upload
+    const drop = document.getElementById("upload-drop");
+    const file = document.getElementById("slika");
+    const preview = document.getElementById("upload-preview");
+    const clearBtn = document.getElementById("upload-clear");
+    function setFile(f) {
+      if (!f) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.innerHTML = `<img src="${e.target.result}" alt="Predogled" />`;
+        if (clearBtn) clearBtn.hidden = false;
+      };
+      reader.readAsDataURL(f);
+    }
+    if (file) {
+      file.addEventListener("change", (e) => setFile(e.target.files && e.target.files[0]));
+    }
+    if (drop) {
+      ["dragenter", "dragover"].forEach((ev) =>
+        drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("is-dragging"); })
+      );
+      ["dragleave", "drop"].forEach((ev) =>
+        drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("is-dragging"); })
+      );
+      drop.addEventListener("drop", (e) => {
+        const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (f && file) {
+          const dt = new DataTransfer();
+          dt.items.add(f);
+          file.files = dt.files;
+          setFile(f);
+        }
+      });
+    }
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        if (file) file.value = "";
+        preview.innerHTML = `
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>`;
+        clearBtn.hidden = true;
+      });
+    }
+
+    // Submit
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!validatePanel(current)) return;
+      // Stub: in production this would POST to a backend.
+      show("done");
+    });
+
+    show(1);
+  })();
+</script>
+</Layout>
+
+</invoke>

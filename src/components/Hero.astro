@@ -1,0 +1,73 @@
+---
+const highlights = [
+  {
+    icon: "https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/66798ff1d31f6059e7ca6963_comments.png",
+    title: "Unlimited talk and\u00A0text\u00A0globally",
+  },
+  {
+    icon: "https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/66798ff0b92bca5977e4459c_world-pin.png",
+    title: "Unlimited data in\u00A0180+\u00A0Countries",
+  },
+  {
+    icon: "https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/66798ff0b7c2691c406bee3c_event-create.png",
+    title: "Cancel anytime",
+  },
+];
+---
+
+<header class="hero">
+  <div class="page-padding">
+    <div class="container-pop">
+      <div class="home-hero-header">
+        <div class="eyebrow-pill">
+          <span class="eyebrow-pill-bg u-rainbow u-blur-perf"></span>
+          <a href="#" class="eyebrow-pill-inner"><strong>Now live in&nbsp;Alpha!</strong></a>
+        </div>
+
+        <h1 class="home-hero-heading mt-6">One global plan. No&nbsp;hassle.</h1>
+
+        <div class="home-hero-subheading mt-6">
+          <p class="subheading">Enjoy unlimited global service for $69/mo. No roaming fees, or&nbsp;headaches.</p>
+        </div>
+
+        <div class="btn-wrapper cc-hero mt-8 flex justify-center">
+          <a href="#signup" class="cta">
+            <span class="cta-bg u-rainbow u-blur-perf"></span>
+            <span class="cta-inner"><strong>Sign up</strong></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="home-hero-img-wrap">
+        <img
+          src="https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/69cd18cac294945d09e5dfaa_hero-portal-bg-new.webp"
+          loading="eager"
+          alt=""
+          class="home-hero-portal"
+        />
+        <div class="home-hero-mockup cc-1">
+          <img src="https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/69cd18ca5f9f525f55ff2316_popcorn-home-app-left.webp" alt="" loading="eager" />
+        </div>
+        <div class="home-hero-mockup cc-2">
+          <img src="https://cdn.prod.website-files.com/66797c2909f9ec0b1ff1a767/69cd18ca3fd01363c8e5d1ad_popcorn-esim-app-left.webp" alt="" loading="eager" />
+        </div>
+      </div>
+
+      <div class="hero-highlights-wrap">
+        {highlights.map((h) => (
+          <div class="hero-highlight-cell">
+            <span class="icon-wrap">
+              <span class="icon-bg u-rainbow u-blur-perf"></span>
+              <span class="icon-inner">
+                <img src={h.icon} width="32" height="32" alt="" />
+              </span>
+            </span>
+            <h3 class="heading-m">{h.title}</h3>
+          </div>
+        ))}
+      </div>
+
+      <div class="hero-notice">*Subject to our Play by the Rules policy</div>
+    </div>
+  </div>
+</header>
